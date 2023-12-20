@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "DpV8xFO40dISfN332JyBAncQJvi2LJSzNkvwBkCWRhJbYbvofrI+kP70MZ3FY/Tj32HxaasgXOeeKSOoMELB8g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\flavia\\Desktop\\.NET\\SalesWebMvc\\Curso CSharp\\didaticosRedimensionador\\didaticosRedimensionador\\didaticosRedimensionador.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\flavia\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\flavia\\.nuget\\packages\\system.drawing.common\\8.0.0\\system.drawing.common.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

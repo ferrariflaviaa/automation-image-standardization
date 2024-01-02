@@ -20,6 +20,7 @@ namespace didaticos.redimensionador
             string diretorio_entrada = "Arquivos_Entrada";
             string diretorio_finalizado = "Arquivos_Finalizado";
             string diretorio_redimensionado = "Arquivos_Redimensionados";
+            string diretorio_redimensionado_instagram = "Arquivos_Redimensionados_Instagram";
 
 
             if (!Directory.Exists(diretorio_entrada))
@@ -34,6 +35,10 @@ namespace didaticos.redimensionador
             {
                 Directory.CreateDirectory(diretorio_finalizado);
             }
+            if (!Directory.Exists(diretorio_redimensionado_instagram))
+            {
+                Directory.CreateDirectory(diretorio_redimensionado_instagram);
+            }
             #endregion
 
             FileStream fileStream;
@@ -47,6 +52,7 @@ namespace didaticos.redimensionador
 
                 //ler o tamanho que irá redimencionar
                 int novaAltura = 200;
+                int alturaInstagram = 1080;
 
                 foreach (var arquivo in arquivoEntrada) {
 
@@ -55,9 +61,13 @@ namespace didaticos.redimensionador
                     Console.WriteLine(fileInfo.Name);
                     string caminho = Environment.CurrentDirectory + @"\" + diretorio_redimensionado + @"\"
                     + DateTime.Now.Millisecond.ToString() + "_" + fileInfo.Name;
+                    string caminhoInstagram = Environment.CurrentDirectory + @"\" + diretorio_redimensionado_instagram + @"\"
+                    + DateTime.Now.Millisecond.ToString() + "_insta" + fileInfo.Name;
 
                     //Redimenciona + copia os arquivos redimensionado para a pasta de redimensionados
                     Redimensionador(Image.FromStream(fileStream),novaAltura, caminho);
+                    RedimensionadorInstagram(Image.FromStream(fileStream), alturaInstagram, caminhoInstagram);
+                    
 
                     //fecha o arquivo
                     fileStream.Close();
@@ -97,5 +107,24 @@ namespace didaticos.redimensionador
             imagem.Dispose();
 
         }
+
+        static void RedimensionadorInstagram(Image imagem, int altura, string caminho)
+        {
+            double ratio = (double)altura / (double)imagem.Height;
+            int novaLargura = (int)(imagem.Width * ratio);
+            int novaAltura = (int)(imagem.Height * ratio);
+
+            Bitmap novaImage = new Bitmap(novaLargura, novaAltura);
+
+            using (Graphics g = Graphics.FromImage(novaImage))
+            {
+                g.DrawImage(imagem, 0, 0, novaLargura, novaAltura);
+            }
+            novaImage.Save(caminho);
+            imagem.Dispose();
+
+        }
     }
+
+
 }
